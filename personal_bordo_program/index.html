@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#17070c" />
+  <title>Бордовая программа: жим + спина + плечи</title>
+  <style>
+    :root{
+      --bg:#080507;
+      --panel:#130a0e;
+      --panel2:#1b0d13;
+      --card:#171116;
+      --card2:#21161d;
+      --line:#34202a;
+      --line2:#57303d;
+      --text:#fff7fa;
+      --muted:#b9a7af;
+      --muted2:#8f7a84;
+      --accent:#8e1233;
+      --accent2:#b51d46;
+      --accent3:#e13b68;
+      --good:#2ed77d;
+      --warn:#f2b84b;
+      --danger:#ff5c7c;
+      --shadow:0 18px 60px rgba(142,18,51,.22);
+      --radius:24px;
+      --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html{background:var(--bg);color:var(--text);font-family:var(--font);scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:
+      radial-gradient(900px 520px at 50% -160px, rgba(177,29,70,.28), transparent 62%),
+      radial-gradient(650px 460px at 100% 10%, rgba(142,18,51,.18), transparent 68%),
+      linear-gradient(180deg,#080507 0%,#0b0608 52%,#050404 100%);}
+    button,input,select,textarea{font:inherit}
+    button{touch-action:manipulation;cursor:pointer;border:0;color:inherit}
+    a{color:inherit}
+    .wrap{width:min(980px,100%);margin:0 auto;padding:18px 14px 92px}
+    .top{
+      position:sticky;top:0;z-index:10;padding:10px 0 12px;background:linear-gradient(180deg,rgba(8,5,7,.97),rgba(8,5,7,.84) 75%,transparent);backdrop-filter: blur(10px);
+    }
+    .hero{border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg,rgba(27,13,19,.92),rgba(13,8,11,.82));box-shadow:var(--shadow);padding:18px;overflow:hidden;position:relative}
+    .hero:before{content:"";position:absolute;inset:-90px -90px auto auto;width:230px;height:230px;background:radial-gradient(circle,rgba(225,59,104,.25),transparent 62%);pointer-events:none}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border:1px solid var(--line2);border-radius:999px;background:rgba(142,18,51,.14);color:#ffd3df;font-weight:800;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+    h1{font-size:clamp(30px,7vw,54px);line-height:.98;margin:14px 0 10px;letter-spacing:-.06em}
+    .lead{margin:0;color:var(--muted);font-size:15px;line-height:1.5;max-width:740px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:14px}
+    .panel{grid-column:span 12;border:1px solid var(--line);background:rgba(19,10,14,.78);border-radius:var(--radius);padding:14px}
+    @media(min-width:760px){.panel.half{grid-column:span 6}.panel.third{grid-column:span 4}.panel.twoThird{grid-column:span 8}}
+    .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:8px 0 10px}
+    h2{font-size:26px;line-height:1.05;margin:0;letter-spacing:-.04em}
+    h3{font-size:19px;line-height:1.15;margin:0 0 10px;letter-spacing:-.025em}
+    .tiny{font-size:12px;color:var(--muted2);line-height:1.35}
+    .row{display:grid;grid-template-columns:1fr 118px;gap:10px;align-items:center;margin:10px 0}
+    label{color:var(--muted);font-weight:700;font-size:14px;line-height:1.25}
+    input,select{width:100%;background:#0e090c;color:var(--text);border:1px solid var(--line);border-radius:16px;padding:13px 12px;outline:none;min-height:48px}
+    input:focus,select:focus{border-color:var(--accent3);box-shadow:0 0 0 3px rgba(225,59,104,.14)}
+    .inputHint{display:block;color:var(--muted2);font-size:11px;font-weight:650;margin-top:4px}
+    .toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:18px;padding:12px;background:#100a0d;margin-top:10px}
+    .switch{width:58px;height:34px;border-radius:999px;background:#2a1a21;border:1px solid var(--line2);position:relative;flex:0 0 auto}
+    .switch i{display:block;width:26px;height:26px;border-radius:50%;background:var(--muted);position:absolute;left:4px;top:3px;transition:.18s transform,.18s background}
+    .switch.on{background:linear-gradient(135deg,var(--accent),var(--accent3))}.switch.on i{background:#fff;transform:translateX(23px)}
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{border-radius:18px;min-height:50px;padding:13px 16px;font-weight:950;letter-spacing:.02em;background:linear-gradient(135deg,var(--accent),var(--accent3));box-shadow:0 12px 32px rgba(181,29,70,.24)}
+    .btn.secondary{background:#141014;border:1px solid var(--line);box-shadow:none;color:#f7eaf0}
+    .btn.ghost{background:rgba(142,18,51,.12);border:1px solid var(--line2);box-shadow:none;color:#ffd3df}
+    .btn.full{width:100%}
+    .weeks{display:flex;gap:9px;overflow-x:auto;padding:12px 2px 8px;scrollbar-width:none}.weeks::-webkit-scrollbar{display:none}
+    .weekBtn{flex:0 0 auto;width:54px;height:54px;border-radius:17px;background:#120d11;border:1px solid var(--line);color:#fff;font-weight:950;font-size:19px}
+    .weekBtn.active{background:linear-gradient(135deg,var(--accent2),var(--accent3));box-shadow:0 12px 28px rgba(181,29,70,.3)}
+    .weekBtn.done{position:relative}.weekBtn.done:after{content:"✓";position:absolute;right:-6px;top:-7px;width:21px;height:21px;border-radius:50%;background:var(--good);display:grid;place-items:center;font-size:13px;color:#062314;border:2px solid var(--bg)}
+    .day{border:1px solid var(--line);background:linear-gradient(180deg,rgba(23,17,22,.92),rgba(15,10,14,.9));border-radius:25px;padding:13px;margin-top:12px}
+    .dayHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+    .dayName{font-weight:1000;font-size:22px;letter-spacing:-.035em}.dayFocus{color:#ffd3df;background:rgba(142,18,51,.18);border:1px solid var(--line2);padding:7px 10px;border-radius:999px;font-weight:850;font-size:12px;white-space:nowrap}
+    .exercise{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:#0f0b0e;border:1px solid #251821;border-radius:20px;padding:12px;margin:9px 0;min-height:72px}
+    .check{width:38px;height:38px;border-radius:14px;background:#1a1419;border:1px solid var(--line);display:grid;place-items:center;color:transparent;font-weight:1000;font-size:20px;line-height:1}
+    .check.checked{background:linear-gradient(135deg,var(--good),#85ffba);color:#062314;border-color:transparent}
+    .exName{font-weight:950;font-size:16px;letter-spacing:-.02em;line-height:1.15}.exMeta{color:var(--muted);font-weight:700;font-size:13px;line-height:1.35;margin-top:4px}.exNote{color:#d2bec7;font-size:12px;line-height:1.35;margin-top:4px}
+    .pill{font-weight:1000;font-size:15px;color:#fff;background:rgba(142,18,51,.18);border:1px solid var(--line2);border-radius:14px;padding:9px 10px;white-space:nowrap;text-align:right;min-width:84px}
+    .pill.light{background:#171116;color:var(--muted);border-color:var(--line)}
+    .summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}.sumBox{background:#100a0d;border:1px solid var(--line);border-radius:18px;padding:12px}.sumVal{font-size:22px;font-weight:1000;letter-spacing:-.04em}.sumLab{font-size:12px;color:var(--muted);font-weight:750;margin-top:4px}
+    @media(max-width:430px){.wrap{padding-left:10px;padding-right:10px}.hero{padding:15px;border-radius:26px}.panel{padding:12px;border-radius:22px}.row{grid-template-columns:1fr 104px}.exercise{grid-template-columns:auto 1fr;gap:9px}.pill{grid-column:2/3;justify-self:start}.dayName{font-size:20px}.dayHead{align-items:flex-start;flex-direction:column}.summary{grid-template-columns:1fr}}
+    .notice{border:1px solid rgba(242,184,75,.28);background:rgba(242,184,75,.08);color:#ffe3a6;border-radius:18px;padding:12px;line-height:1.45;font-size:13px;margin-top:10px}
+    .ok{border-color:rgba(46,215,125,.25);background:rgba(46,215,125,.08);color:#cffff0}.danger{border-color:rgba(255,92,124,.25);background:rgba(255,92,124,.08);color:#ffd0d9}
+    .table{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:13px}.table th{text-align:left;color:var(--muted2);font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding:0 8px}.table td{background:#0f0b0e;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 8px}.table td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px;font-weight:900}.table td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.foot{color:var(--muted2);font-size:12px;line-height:1.5;text-align:center;margin-top:18px}
+    textarea{width:100%;min-height:150px;resize:vertical;background:#0e090c;color:#fff;border:1px solid var(--line);border-radius:18px;padding:12px;outline:none;font-size:12px;line-height:1.4}
+    .hide{display:none!important}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="hero">
+        <span class="badge">Bordo Press • персональный цикл</span>
+        <h1>Жим + спина + плечи</h1>
+        <p class="lead">8 недель под твой сплит: понедельник — спина и трицепс, среда — плечи, пятница — грудь и бицепс. Жим поставлен главным лифтом, спина и дельты помогают прогрессу и берегут плечи.</p>
+        <div class="summary">
+          <div class="sumBox"><div class="sumVal" id="tmBox">— кг</div><div class="sumLab">тренировочный максимум для жима</div></div>
+          <div class="sumBox"><div class="sumVal" id="weekBox">1 / 8</div><div class="sumLab">текущая неделя цикла</div></div>
+        </div>
+      </div>
+      <div class="weeks" id="weeks"></div>
+    </div>
+
+    <div class="grid">
+      <section class="panel twoThird">
+        <div class="sectionTitle"><h2>Расчет</h2><span class="tiny">можно менять в любой момент</span></div>
+        <div class="row"><label>Твой максимум в жиме лежа<span class="inputHint">по скринам поставил 110 кг</span></label><input id="benchMax" type="number" inputmode="decimal" min="20" step="0.5" value="110"></div>
+        <div class="row"><label>Режим прогрессии<span class="inputHint">лучше начать с обычного</span></label><select id="mode"><option value="0.92">бережный</option><option value="0.95" selected>обычный</option><option value="0.98">пиковый</option></select></div>
+        <div class="row"><label>Округление весов<span class="inputHint">обычно 2.5 кг</span></label><select id="roundStep"><option>1</option><option>1.25</option><option selected>2.5</option><option>5</option></select></div>
+        <button class="toggle" id="benchWedToggle" type="button"><span><b>Легкий жим в среду</b><br><span class="tiny">короткая техника с паузой, чтобы жим рос быстрее</span></span><span class="switch on" id="benchWedSwitch"><i></i></span></button>
+        <div class="btns"><button class="btn" id="calcBtn" type="button">Рассчитать</button><button class="btn secondary" id="resetChecksBtn" type="button">Сбросить галочки</button><button class="btn ghost" id="exportBtn" type="button">Экспорт</button></div>
+        <div class="notice">Важно: тяжелые подходы в жиме делай со страхующим. Если болит плечо, локоть или грудная мышца — снизь веса на 5–10% и не делай тест максимума.</div>
+      </section>
+
+      <section class="panel third">
+        <h3>Правило прогрессии</h3>
+        <p class="lead" style="font-size:14px">Для блоков и гантелей введи свой рабочий вес. Приложение само даст веса по неделям. Если на последней тяжелой неделе сделал все чисто — в следующем цикле добавь:</p>
+        <div class="notice ok">Блоки/тренажеры: +2.5–5 кг<br>Гантели/махи: +1–2 кг на руку<br>Жим лежа: +2.5 кг к 1ПМ</div>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-top:12px">
+      <div class="sectionTitle"><h2>Твои рабочие веса</h2><span class="tiny">оставь пустым, если пока не знаешь</span></div>
+      <div class="grid" id="inputsGrid"></div>
+    </section>
+
+    <section class="panel" style="margin-top:12px">
+      <div class="sectionTitle"><h2 id="programTitle">Неделя 1</h2><span class="tiny" id="weekHint">входная неделя</span></div>
+      <div id="program"></div>
+    </section>
+
+    <section class="panel hide" id="exportPanel" style="margin-top:12px">
+      <div class="sectionTitle"><h2>Экспорт</h2><button class="btn secondary" id="copyBtn" type="button">Скопировать</button></div>
+      <textarea id="exportText" readonly></textarea>
+    </section>
+
+    <section class="panel" style="margin-top:12px">
+      <h2>Как выполнять</h2>
+      <table class="table">
+        <thead><tr><th>Зона</th><th>Как делать</th></tr></thead>
+        <tbody>
+          <tr><td>Жим лежа</td><td>Без отказа до 8-й недели. Пауза на груди 0.5–1 сек на легком жиме. На тяжелом жиме оставляй 1 повтор в запасе, кроме теста.</td></tr>
+          <tr><td>Спина</td><td>Тяни локтем, не кистью. В конце повторения лопатки вниз-назад, корпус не раскачивать. Последний подход можно тяжелее, но без читинга.</td></tr>
+          <tr><td>Плечи</td><td>Махи — медленно, без закидывания корпуса. В жиме плеч не уходи в отказ, чтобы не убивать пятничный жим.</td></tr>
+          <tr><td>Руки</td><td>Трицепс и бицепс качай почти до отказа, но оставляй 1–2 повтора в запасе на первых подходах.</td></tr>
+        </tbody>
+      </table>
+      <div class="notice danger">Если на неделе 6–7 жим резко просел, не форсируй: повтори предыдущую неделю или сделай разгрузку. Это лучше, чем упереться в травму.</div>
+    </section>
+    <div class="foot">Сохраняется прямо в браузере телефона. Для GitHub Pages достаточно загрузить этот index.html в репозиторий.</div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  const $ = (id)=>document.getElementById(id);
+  const safeStore = {
+    get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},
+    set(k,v){try{localStorage.setItem(k,v)}catch(e){}},
+    del(k){try{localStorage.removeItem(k)}catch(e){}}
+  };
+  const state = { week: Number(safeStore.get('bp_week','1')) || 1, wedBench: safeStore.get('bp_wedBench','1') !== '0' };
+
+  const fields = [
+    {key:'latWide', label:'Пн: тяга верхнего блока', hint:'рабочий вес на 10 чистых'},
+    {key:'latClose', label:'Пн: верхний блок узкой гребной ручкой', hint:'рабочий вес на 10 чистых'},
+    {key:'rowRegular', label:'Пн: нижний блок обычной ручкой', hint:'рабочий вес на 10 чистых'},
+    {key:'rowWide', label:'Пн: нижний блок широкой гребной ручкой', hint:'рабочий вес на 10 чистых'},
+    {key:'triPush', label:'Пн: трицепс с палкой в блоке', hint:'рабочий вес на 12 чистых'},
+    {key:'triOver', label:'Пн: гантель за головой / канат', hint:'рабочий вес на 12 чистых'},
+    {key:'latRaise', label:'Ср: махи на среднюю дельту', hint:'вес одной гантели на 15 чистых'},
+    {key:'rearDelt', label:'Ср: задняя дельта', hint:'рабочий вес на 15 чистых'},
+    {key:'ohpMachine', label:'Ср: армейский жим в тренажере', hint:'рабочий вес на 8 чистых'},
+    {key:'cableLatRaise', label:'Ср: махи в блоке одной рукой', hint:'вес на одну руку на 15 чистых'},
+    {key:'incline', label:'Пт: наклонный жим / гантели', hint:'рабочий вес на 8 чистых'},
+    {key:'fly', label:'Пт: сведение в блоке', hint:'рабочий вес на 12 чистых'},
+    {key:'bicepsCable', label:'Пт: бицепс с палкой в блоке', hint:'рабочий вес на 10 чистых'},
+    {key:'dbCurl', label:'Пт: гантели на бицепс', hint:'вес одной гантели на 10 чистых'},
+    {key:'hammer', label:'Пт: молотки с гантелями', hint:'вес одной гантели на 10 чистых'}
+  ];
+
+  const weekHints = [
+    'входная неделя: техника и запас',
+    'добавляем объем без отказа',
+    'первая тяжелая неделя',
+    'разгрузка: восстановить плечи и локти',
+    'новый заход, веса выше',
+    'силовая неделя',
+    'пиковая неделя, без лишнего отказа',
+    'тест / закрепление результата'
+  ];
+
+  const assist = [
+    {scale:.90, setsBack:'3×10', setsIso:'3×12', setsDelt:'3×15', setsPress:'3×8', note:'RIR 2–3, спокойно'},
+    {scale:.95, setsBack:'3×10–11', setsIso:'3×12–13', setsDelt:'3×15–18', setsPress:'3×8–9', note:'RIR 2'},
+    {scale:1.00, setsBack:'4×8–10', setsIso:'4×10–12', setsDelt:'4×12–15', setsPress:'4×6–8', note:'тяжело, но чисто'},
+    {scale:.82, setsBack:'2×12', setsIso:'2×12–15', setsDelt:'2×15', setsPress:'2×8', note:'разгрузка'},
+    {scale:1.00, setsBack:'4×8', setsIso:'4×10', setsDelt:'4×12–15', setsPress:'4×6–8', note:'снова тяжелее'},
+    {scale:1.03, setsBack:'4×8–9', setsIso:'4×10–12', setsDelt:'4×12–15', setsPress:'4×6–8', note:'добавь вес, если чисто'},
+    {scale:1.06, setsBack:'3×6–8', setsIso:'3×8–10', setsDelt:'3×10–12', setsPress:'3×5–6', note:'пик, без читинга'},
+    {scale:.90, setsBack:'2×10–12', setsIso:'2×12', setsDelt:'2×15', setsPress:'2×8', note:'легко или тест повторов'}
+  ];
+
+  const benchFriday = [
+    {main:[{name:'Жим лежа', pct:.75, sets:'5×5', tag:'объем'}], note:'Все подходы с запасом 2 повтора.'},
+    {main:[{name:'Жим лежа', pct:.80, sets:'5×4', tag:'сила'}], note:'Последний подход не в отказ.'},
+    {main:[{name:'Жим лежа', pct:.85, sets:'6×3', tag:'тяжело'}], note:'Отдых 3–5 минут.'},
+    {main:[{name:'Жим лежа', pct:.65, sets:'4×5', tag:'разгрузка'}], note:'Легкая техника, не разгоняй.'},
+    {main:[{name:'Жим лежа — топ-сингл', pct:.90, sets:'1×1', tag:'контроль'}, {name:'Жим лежа — рабочие', pct:.80, sets:'4×4', tag:'объем'}], note:'Сингл должен быть быстрым, не максимум.'},
+    {main:[{name:'Жим лежа — топ-сингл', pct:.925, sets:'1×1', tag:'контроль'}, {name:'Жим лежа — рабочие', pct:.85, sets:'5×3', tag:'сила'}], note:'Если сингл медленный — рабочие минус 2.5 кг.'},
+    {main:[{name:'Жим лежа — топ-сингл', pct:.95, sets:'1×1', tag:'пик'}, {name:'Жим лежа — рабочие', pct:.88, sets:'4×2', tag:'пик'}], note:'Не делай негативы без страхующего.'},
+    {main:[{name:'Жим лежа — 90%', pct:.90, sets:'1×1', tag:'тест'}, {name:'Жим лежа — 97%', pct:.97, sets:'1×1', tag:'тест'}, {name:'Жим лежа — 100%', pct:1.00, sets:'1×1', tag:'тест'}, {name:'Жим лежа — PR, если быстро', pct:1.025, sets:'1×1', tag:'опц.'}, {name:'Жим лежа — добивка', pct:.75, sets:'3×3', tag:'легко'}], note:'PR только если предыдущий подход был уверенный.'}
+  ];
+  const benchWed = [
+    {pct:.60, sets:'3×5'}, {pct:.65, sets:'4×4'}, {pct:.70, sets:'5×3'}, {pct:.55, sets:'3×5'},
+    {pct:.675, sets:'4×4'}, {pct:.725, sets:'5×3'}, {pct:.75, sets:'3×2'}, {pct:.60, sets:'2×3'}
+  ];
+
+  function readSettings(){
+    const v = Number($('benchMax').value || 110);
+    const mode = Number($('mode').value || .95);
+    const step = Number($('roundStep').value || 2.5);
+    return {benchMax:v, mode, step, tm:v*mode};
+  }
+  function rnd(x){
+    const step = readSettings().step;
+    if(!isFinite(x)||!x) return '—';
+    const y = Math.round(x/step)*step;
+    return (Math.round(y*100)/100).toString().replace('.',',');
+  }
+  function getField(key){
+    const el = $('f_'+key);
+    const v = el ? Number(String(el.value).replace(',','.')) : 0;
+    return isFinite(v) && v>0 ? v : 0;
+  }
+  function weightText(key, scale){
+    const v = getField(key);
+    if(!v) return 'введи вес';
+    return rnd(v*scale) + ' кг';
+  }
+  function benchWeight(pct, useTrueMax){
+    const s = readSettings();
+    const base = useTrueMax ? s.benchMax : s.tm;
+    return rnd(base*pct) + ' кг';
+  }
+  function makeExercise(id, name, meta, weight, note){
+    const checked = safeStore.get('bp_check_'+id,'0') === '1';
+    return `<button class="exercise" type="button" data-check="${id}">
+      <span class="check ${checked?'checked':''}">${checked?'✓':''}</span>
+      <span><span class="exName">${name}</span><span class="exMeta">${meta}</span>${note?`<span class="exNote">${note}</span>`:''}</span>
+      <span class="pill ${weight==='введи вес'?'light':''}">${weight}</span>
+    </button>`;
+  }
+  function assistEx(w, key, name, setType, extra){
+    const a = assist[w-1];
+    const sets = a[setType];
+    return makeExercise(`${w}_${key}`, name, sets, weightText(key,a.scale), `${a.note}${extra?' • '+extra:''}`);
+  }
+  function day(title, focus, html){
+    return `<div class="day"><div class="dayHead"><div class="dayName">${title}</div><div class="dayFocus">${focus}</div></div>${html}</div>`;
+  }
+  function renderInputs(){
+    const grid = $('inputsGrid');
+    grid.innerHTML = fields.map(f=>{
+      const saved = safeStore.get('bp_'+f.key,'');
+      return `<div class="panel half" style="margin:0;background:#100a0d"><div class="row" style="grid-template-columns:1fr 102px;margin:0"><label>${f.label}<span class="inputHint">${f.hint}</span></label><input id="f_${f.key}" data-save="${f.key}" type="number" inputmode="decimal" min="0" step="0.5" value="${saved}"></div></div>`;
+    }).join('');
+    fields.forEach(f=>{
+      const el = $('f_'+f.key);
+      if(el){ el.addEventListener('input',()=>{safeStore.set('bp_'+f.key,el.value); renderProgram();}); }
+    });
+  }
+  function renderWeeks(){
+    const el = $('weeks');
+    let html='';
+    for(let i=1;i<=8;i++){
+      const done = safeStore.get('bp_week_done_'+i,'0')==='1';
+      html += `<button class="weekBtn ${i===state.week?'active':''} ${done?'done':''}" type="button" data-week="${i}">${i}</button>`;
+    }
+    el.innerHTML = html;
+    el.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{state.week=Number(b.dataset.week);safeStore.set('bp_week',String(state.week));renderAll(false);}));
+  }
+  function renderProgram(){
+    const w = state.week;
+    const s = readSettings();
+    $('tmBox').textContent = rnd(s.tm) + ' кг';
+    $('weekBox').textContent = w + ' / 8';
+    $('programTitle').textContent = 'Неделя ' + w;
+    $('weekHint').textContent = weekHints[w-1];
+    const monday = day('Понедельник', 'спина + трицепс',
+      assistEx(w,'latWide','Тяга верхнего блока к груди','setsBack','лопатки вниз')+
+      assistEx(w,'latClose','Верхний блок узкой гребной ручкой','setsBack','узкий нейтральный хват')+
+      assistEx(w,'rowRegular','Тяга нижнего блока обычной ручкой','setsBack','на широчайшие')+
+      assistEx(w,'rowWide','Тяга нижнего блока широкой гребной ручкой','setsBack','контроль корпуса')+
+      assistEx(w,'triPush','Трицепс с палкой в блоке','setsIso','локти на месте')+
+      assistEx(w,'triOver','Гантель за головой / канат за спиной','setsIso','длинная головка трицепса')
+    );
+    let wedList = '';
+    if(state.wedBench){
+      const bw = benchWed[w-1];
+      wedList += makeExercise(`${w}_wedBench`, 'Жим лежа с паузой / техника', bw.sets, benchWeight(bw.pct,false), 'легко, скорость, без отказа');
+    }
+    wedList += assistEx(w,'latRaise','Махи на среднюю дельту','setsDelt','не закидывать корпус')+
+      assistEx(w,'rearDelt','Задняя дельта','setsDelt','плечи вниз')+
+      assistEx(w,'ohpMachine','Армейский жим в тренажере с блинами','setsPress','не в отказ')+
+      assistEx(w,'cableLatRaise','Махи в блоке по одной руке','setsDelt','медленная негативная фаза')+
+      makeExercise(`${w}_rotator`, 'Наружная ротация / легкий face pull', '2×15–20', 'легко', 'для здоровья плеч');
+    const wBench = benchFriday[w-1];
+    let friList = wBench.main.map((b,idx)=>makeExercise(`${w}_bench_${idx}`, b.name, b.sets, benchWeight(b.pct, w===8), b.tag+' • '+wBench.note)).join('');
+    friList += assistEx(w,'incline','Наклонный жим / жим гантелей','setsPress','после жима не до отказа')+
+      assistEx(w,'fly','Сведение в блоке на грудь','setsIso','растяжение без боли')+
+      assistEx(w,'bicepsCable','Бицепс с палкой в блоке','setsIso','локти фиксированы')+
+      assistEx(w,'dbCurl','Гантели на бицепс','setsIso','супинация кисти')+
+      assistEx(w,'hammer','Молотки с гантелями','setsIso','плечевая мышца');
+    $('program').innerHTML = monday + day('Среда', 'плечи + техника жима', wedList) + day('Пятница', 'грудь + бицепс', friList) + `<div class="btns"><button class="btn full" type="button" id="markWeekBtn">Отметить неделю выполненной</button></div>`;
+    document.querySelectorAll('[data-check]').forEach(el=>{
+      el.addEventListener('click',()=>{
+        const id=el.getAttribute('data-check');
+        const key='bp_check_'+id;
+        const now = safeStore.get(key,'0')!=='1';
+        safeStore.set(key,now?'1':'0');
+        const c=el.querySelector('.check');
+        if(c){c.classList.toggle('checked',now);c.textContent=now?'✓':'';}
+      });
+    });
+    const mb = $('markWeekBtn');
+    if(mb){mb.addEventListener('click',()=>{safeStore.set('bp_week_done_'+w,'1'); if(w<8){state.week=w+1; safeStore.set('bp_week',String(state.week));} renderAll(false);});}
+  }
+  function renderAll(includeInputs){
+    renderWeeks();
+    $('benchWedSwitch').classList.toggle('on',state.wedBench);
+    if(includeInputs) renderInputs();
+    renderProgram();
+  }
+  function buildExport(){
+    let out=[];
+    const oldWeek=state.week;
+    for(let w=1;w<=8;w++){
+      state.week=w;
+      const s=readSettings();
+      out.push(`НЕДЕЛЯ ${w}: ${weekHints[w-1]}`);
+      out.push(`ТМ жима: ${rnd(s.tm)} кг`);
+      out.push('Понедельник — спина + трицепс');
+      const a=assist[w-1];
+      const lines = [
+        ['Тяга верхнего блока', 'latWide', a.setsBack], ['Верхний блок узкой гребной ручкой','latClose',a.setsBack], ['Нижний блок обычной ручкой','rowRegular',a.setsBack], ['Нижний блок широкой ручкой','rowWide',a.setsBack], ['Трицепс с палкой','triPush',a.setsIso], ['Гантель/канат на трицепс','triOver',a.setsIso]
+      ];
+      lines.forEach(x=>out.push(`- ${x[0]}: ${x[2]} × ${weightText(x[1],a.scale)} (${a.note})`));
+      out.push('Среда — плечи');
+      if(state.wedBench){ const bw=benchWed[w-1]; out.push(`- Жим лежа с паузой: ${bw.sets} × ${benchWeight(bw.pct,false)}`); }
+      [['Махи средняя дельта','latRaise',a.setsDelt],['Задняя дельта','rearDelt',a.setsDelt],['Армейский жим в тренажере','ohpMachine',a.setsPress],['Махи в блоке одной рукой','cableLatRaise',a.setsDelt]].forEach(x=>out.push(`- ${x[0]}: ${x[2]} × ${weightText(x[1],a.scale)} (${a.note})`));
+      out.push('- Ротатор / face pull: 2×15–20 легко');
+      out.push('Пятница — грудь + бицепс');
+      benchFriday[w-1].main.forEach(b=>out.push(`- ${b.name}: ${b.sets} × ${benchWeight(b.pct,w===8)} (${b.tag})`));
+      [['Наклонный жим / гантели','incline',a.setsPress],['Сведение в блоке','fly',a.setsIso],['Бицепс с палкой','bicepsCable',a.setsIso],['Гантели на бицепс','dbCurl',a.setsIso],['Молотки','hammer',a.setsIso]].forEach(x=>out.push(`- ${x[0]}: ${x[2]} × ${weightText(x[1],a.scale)} (${a.note})`));
+      out.push('');
+    }
+    state.week=oldWeek;
+    return out.join('\n');
+  }
+
+  ['benchMax','mode','roundStep'].forEach(id=>{
+    const el=$(id); const saved=safeStore.get('bp_'+id,null); if(saved!==null) el.value=saved;
+    el.addEventListener('input',()=>{safeStore.set('bp_'+id,el.value);renderProgram();});
+    el.addEventListener('change',()=>{safeStore.set('bp_'+id,el.value);renderProgram();});
+  });
+  $('calcBtn').addEventListener('click',()=>renderAll(false));
+  $('benchWedToggle').addEventListener('click',()=>{state.wedBench=!state.wedBench; safeStore.set('bp_wedBench',state.wedBench?'1':'0'); renderAll(false);});
+  $('resetChecksBtn').addEventListener('click',()=>{Object.keys(localStorage||{}).forEach(k=>{if(k.indexOf('bp_check_')===0||k.indexOf('bp_week_done_')===0)safeStore.del(k)});renderAll(false);});
+  $('exportBtn').addEventListener('click',()=>{$('exportPanel').classList.remove('hide');$('exportText').value=buildExport();setTimeout(()=>$('exportPanel').scrollIntoView({block:'start'}),50);});
+  $('copyBtn').addEventListener('click',async()=>{const t=$('exportText');t.select();try{await navigator.clipboard.writeText(t.value);$('copyBtn').textContent='Скопировано';setTimeout(()=>$('copyBtn').textContent='Скопировать',1200)}catch(e){document.execCommand('copy')}});
+
+  renderAll(true);
+})();
+</script>
+</body>
+</html>
